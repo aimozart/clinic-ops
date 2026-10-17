@@ -1,0 +1,16 @@
+[package]
+name = "decisions"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+description = "Clinic Ops: AI decision records, a deterministic checker, and a post-quantum signed ledger (built on entropa-core)."
+
+[dependencies]
+entropa-core = "0.1.3"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+blake3 = "1"
+hex = "0.4"
+thiserror = "1"
+regex = "1"
