@@ -1,10 +1,11 @@
 use crate::checker::{check, Violation};
 use crate::record::DecisionRecord;
-use entropa_core::{verify_hex, Chain, ChainError, Probe};
+use entropa_core::{verify_hex, Block, Chain, ChainError, Probe};
+use serde::{Deserialize, Serialize};
 
 const BEACON: &str = "clinic-ops-v1";
 
-#[derive(Debug, Clone, PartialEq, Eq)]
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
 pub struct Receipt {
     pub index: u64,
     pub content_hash: String,
@@ -78,6 +79,16 @@ impl Ledger {
 
     pub fn is_empty(&self) -> bool {
         self.len() == 0
+    }
+
+    /// All blocks, genesis first.
+    pub fn blocks(&self) -> &[Block] {
+        &self.chain.blocks
+    }
+
+    /// The ledger's public verifying key (hex).
+    pub fn public_key(&self) -> String {
+        self.probe.pubkey_hex()
     }
 
     pub fn head_hash(&self) -> String {
@@ -177,5 +188,23 @@ mod tests {
         let ra = a.record(&rec(1), 1_700_000_001).unwrap();
         b.record(&rec(1), 1_700_000_001).unwrap();
         assert!(!b.verify_receipt(&ra));
+    }
+
+    #[test]
+    fn receipt_survives_a_json_round_trip() {
+        let mut l = ledger();
+        let r = l.record(&rec(1), 1_700_000_001).unwrap();
+        let back: Receipt = serde_json::from_str(&serde_json::to_string(&r).unwrap()).unwrap();
+        assert_eq!(r, back);
+        assert!(l.verify_receipt(&back));
+    }
+
+    #[test]
+    fn blocks_and_public_key_are_exposed() {
+        let mut l = ledger();
+        let r = l.record(&rec(1), 1_700_000_001).unwrap();
+        assert_eq!(l.blocks().len(), 2);
+        assert_eq!(l.blocks()[1].hash, r.block_hash);
+        assert_eq!(l.public_key(), r.pubkey);
     }
 }

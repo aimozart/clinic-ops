@@ -10,4 +10,5 @@ Who recorded what, and that it was not changed afterwards. It does not prove an 
 
 ## Crates
 - `decisions`: `DecisionRecord`, `checker::check` (allowed kinds, input must be a hash, output length, PHI-like patterns, human gate present), `Ledger` (check, sign, chain, receipts, verify).
-- Next: `clinic-api` (synthetic clinic API + append/verify endpoints), `clinic-mcp` (read-only MCP server over stdio).
+- `clinic-api`: axum API. `GET /health`, `/appointments`, `/summary` (synthetic, seeded), `POST /decisions` (raw input is hashed and dropped; checker runs; ML-DSA signed receipt), `GET /decisions`, `POST /verify`, `GET /chain/head`. CORS limited to one origin (`CORS_ORIGIN`). Ledger and key are in memory for now (restart = new chain; key custody via Key Vault is a later step).
+- Next: `clinic-mcp` (read-only MCP server over stdio), Entropa anchoring client, Dockerfile + CI.
