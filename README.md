@@ -1,5 +1,7 @@
 # clinic-ops
 
+> **Status:** work in progress, built in the open. Synthetic data only (no real patient data). Built by Scott Baker (aimozart) directing AI tools under written rules (see CLAUDE.md and docs/AI-POLICY.md). 37 tests pass (`./run-cargo.sh test`).
+
 Rust workspace for the Clinic Ops capstone: AI decision records, a deterministic checker, and a post-quantum signed ledger built on the published `entropa-core` crate (ML-DSA-65, NIST FIPS 204). Synthetic data only. Built with AI assistance, test first.
 
 ## Run the tests (Rust runs in a container on this PC)
