@@ -1,2 +1,4 @@
 # AI-LOG
 (date | prompt | right | wrong | how caught)
+2026-10-17 | Write docs/ARCHITECTURE-MCP.md (design only, cite rmcp/MCP docs) | Four tools with inputs/outputs/refusals, policy, allowlist, never-do list, cited sources, "could not verify" section | Invented KQL table names (ClinicDecisions, ClinicAppointments, TimeGenerated); said readOnlyHint was in the spec though the fetched text did not name it | Invented names were marked UNVERIFIED and Scott supplied the real schema; readOnlyHint found on re-read of both spec revisions
+2026-10-17 | Apply six decisions to ARCHITECTURE-MCP.md, commit on branch mcp-architecture | Real schema and per-table time columns, validate-only kql_query, PatientRef rule K9, shared phi_matches, unavailable handling, 2025-06-18 vs 2026-07-28 spec comparison | None found yet; nothing was compiled or run, so the design is untested | Not applicable until code and tests exist
