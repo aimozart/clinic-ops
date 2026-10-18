@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "deny": [
+      "Read(./.env)", "Read(./**/.env)", "Read(~/.config/secrets/**)", "Read(~/.aws/**)", "Read(~/.ssh/**)", "Read(~/token_yaml_test)", "Read(~/.claude/.credentials.json)",
+      "Bash(rm -rf:*)", "Bash(git push --force:*)", "Bash(git push -f:*)", "Bash(az group delete:*)", "Bash(az account:*delete*)",
+      "Bash(gcloud:*delete*)", "Bash(gh repo delete:*)", "Bash(sudo:*)"
+    ],
+    "ask": [
+      "Bash(git push:*)", "Bash(az deployment:*)", "Bash(az resource:*)", "Bash(gh repo create:*)", "Bash(gh pr merge:*)", "Bash(gcloud run deploy:*)", "Bash(docker push:*)"
+    ],
+    "allow": [
+      "Bash(./run-cargo.sh:*)", "Bash(git status:*)", "Bash(git diff:*)", "Bash(git log:*)", "Bash(git add:*)", "Bash(git commit:*)"
+    ]
+  }
+}

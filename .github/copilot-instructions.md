@@ -1,0 +1,2 @@
+# Instructions for Copilot and other agents in this repository
+Follow the rules in CLAUDE.md and docs/AI-POLICY.md. Summary: evidence over assertion (show command output); test first (red then green); synthetic data only, never patient data; never read, print or commit secrets; no merges, deploys, deletes or billing changes; use real names only; pin versions; GitHub workflow `permissions` minimal; quote YAML versions ("3.10"); no YAML anchors or merge keys; pass untrusted text through `env:`, never directly into `run:`; Rust tests via `./run-cargo.sh test`.
