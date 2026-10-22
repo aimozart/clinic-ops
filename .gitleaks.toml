@@ -1,0 +1,17 @@
+# Per-repo gitleaks config. Extends the default rules; every allowlist entry MUST carry its reason.
+[extend]
+useDefault = true
+
+[[allowlists]]
+description = "Cargo workspace member list looks like a high-entropy key (false positive)"
+condition = "AND"
+regexTarget = "line"
+paths = ['''^Cargo\.toml$''']
+regexes = ['''members\s*=\s*\[''']
+
+[[allowlists]]
+description = "Synthetic hostile-input curl string in hook tests (no real credential)"
+condition = "AND"
+regexTarget = "line"
+paths = ['''^crates/clinic-hook/tests/(outcome_and_failure|audit_chain)\.rs$''']
+regexes = ['''Bearer SECRETTOKEN123''']
